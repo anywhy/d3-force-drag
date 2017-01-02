@@ -1,5 +1,5 @@
 {
-  "name": "d3-foo",
+  "name": "d3-force-drag",
   "version": "0.0.1",
   "description": "{DESCRIPTION}",
   "keywords": [
@@ -7,18 +7,18 @@
     "d3-module"
   ],
   "license": "BSD-3-Clause",
-  "main": "build/d3-foo.js",
+  "main": "build/d3-force-drag.js",
   "jsnext:main": "index",
-  "homepage": "https://github.com/{USERNAME}/d3-foo",
+  "homepage": "https://github.com/augmt/d3-force-drag",
   "repository": {
     "type": "git",
-    "url": "https://github.com/{USERNAME}/d3-foo.git"
+    "url": "https://github.com/augmt/d3-force-drag.git"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup -f umd -n d3 -o build/d3-foo.js -- index.js",
+    "pretest": "rm -rf build && mkdir build && rollup -f umd -n d3 -o build/d3-force-drag.js -- index.js",
     "test": "tape 'test/**/*-test.js'",
-    "prepublish": "npm run test && uglifyjs build/d3-foo.js -c -m -o build/d3-foo.min.js",
-    "postpublish": "zip -j build/d3-foo.zip -- LICENSE README.md build/d3-foo.js build/d3-foo.min.js"
+    "prepublish": "npm run test && uglifyjs build/d3-force-drag.js -c -m -o build/d3-force-drag.min.js",
+    "postpublish": "zip -j build/d3-force-drag.zip -- LICENSE README.md build/d3-force-drag.js build/d3-force-drag.min.js"
   },
   "devDependencies": {
     "rollup": "0.27",
