@@ -15,13 +15,17 @@
     "url": "https://github.com/augmt/d3-force-drag.git"
   },
   "scripts": {
-    "pretest": "rm -rf build && mkdir build && rollup -f umd -n d3 -o build/d3-force-drag.js -- index.js",
+    "pretest": "rm -rf build && mkdir build && rollup -g d3-drag:d3,d3-selection:d3 -f umd -n d3 -o build/d3-force-drag.js -- index.js",
     "test": "tape 'test/**/*-test.js'",
     "prepublish": "npm run test && uglifyjs build/d3-force-drag.js -c -m -o build/d3-force-drag.min.js",
     "postpublish": "zip -j build/d3-force-drag.zip -- LICENSE README.md build/d3-force-drag.js build/d3-force-drag.min.js"
   },
+  "dependencies": {
+    "d3-drag": "1.0.2",
+    "d3-selection": "1.0.3"
+  },
   "devDependencies": {
-    "rollup": "0.27",
+    "rollup": "^0.41.4",
     "tape": "4",
     "uglify-js": "2"
   }
