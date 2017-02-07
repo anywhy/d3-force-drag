@@ -1,24 +1,10 @@
 import {drag} from "d3-drag";
 import {event} from "d3-selection";
 
-export default function forceDrag(selection, simulation, listeners) {
-  if (typeof listeners !== "object") {
-    listeners = {};
-  }
+var eventTypes = ["start", "drag", "end"];
 
-  var node = selection.node();
-  var dragBehavior = d3.drag();
-
-  if (node instanceof HTMLCanvasElement) {
-    dragBehavior
-      .container(node)
-      .subject(function dragsubject() {
-        return simulation.find(event.x, event.y);
-      });
-  }
-
-  var eventTypes = ["start", "drag", "end"];
-  var defaultListeners = {
+function getDefaultListeners(simulation) {
+  return {
     canvas: {
       start: function start(d) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -47,6 +33,28 @@ export default function forceDrag(selection, simulation, listeners) {
       d.fx = null, d.fy = null;
     }
   };
+}
+function getDefaultSubject(simulation) {
+  return function dragsubject() {
+    simulation.find(event.x, event.y);
+  };
+}
+
+export default function forceDrag(selection, simulation, listeners, dragsubject) {
+  var node = selection.node();
+  var dragBehavior = drag();
+
+  if (node instanceof HTMLCanvasElement) {
+    if (dragsubject === undefined) {
+      dragsubject = typeof listeners === "function" ? listeners : getDefaultSubject(simulation);
+    }
+    dragBehavior.container(node).subject(dragsubject);
+  }
+  if (typeof listeners !== "object") {
+    listeners = {};
+  }
+
+  var defaultListeners = getDefaultListeners(simulation);
 
   for (var i = 0; i < eventTypes.length; i++) {
     var eventType = eventTypes[i];
@@ -60,5 +68,6 @@ export default function forceDrag(selection, simulation, listeners) {
     }
     dragBehavior.on(eventType, listeners[eventType]);
   }
+
   selection.call(dragBehavior);
 }
