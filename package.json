@@ -1,10 +1,13 @@
 {
   "name": "d3-force-drag",
-  "version": "0.0.1",
-  "description": "{DESCRIPTION}",
+  "version": "1.0.0",
+  "description": "Reusable and customizable drag implementation for D3 (v4) force-directed graphs.",
   "keywords": [
     "d3",
-    "d3-module"
+    "d3-module",
+    "graph",
+    "force",
+    "drag"
   ],
   "license": "BSD-3-Clause",
   "main": "build/d3-force-drag.js",
